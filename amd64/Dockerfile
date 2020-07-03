@@ -49,17 +49,17 @@ RUN mkdir -p /opt/scripts/ \
     && chmod 777 /opt/scripts/ \
     && chmod 777 /opt/userscripts/
 WORKDIR /opt/scripts/
-COPY scripts/iobroker_startup.sh iobroker_startup.sh
-COPY scripts/setup_avahi.sh setup_avahi.sh
-COPY scripts/setup_packages.sh setup_packages.sh
-COPY scripts/setup_zwave.sh setup_zwave.sh
+COPY amd64/scripts/iobroker_startup.sh iobroker_startup.sh
+COPY amd64/scripts/setup_avahi.sh setup_avahi.sh
+COPY amd64/scripts/setup_packages.sh setup_packages.sh
+COPY amd64/scripts/setup_zwave.sh setup_zwave.sh
 RUN chmod +x iobroker_startup.sh \
     && chmod +x setup_avahi.sh \
     && chmod +x setup_packages.sh \
     && chmod +x setup_zwave.sh
 WORKDIR /opt/userscripts/
-COPY scripts/userscript_firststart_example.sh userscript_firststart_example.sh
-COPY scripts/userscript_everystart_example.sh userscript_everystart_example.sh
+COPY amd64/scripts/userscript_firststart_example.sh userscript_firststart_example.sh
+COPY amd64/scripts/userscript_everystart_example.sh userscript_everystart_example.sh
 
 # Install ioBroker
 WORKDIR /
