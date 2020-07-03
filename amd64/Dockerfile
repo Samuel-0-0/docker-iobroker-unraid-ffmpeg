@@ -1,9 +1,12 @@
-FROM amd64/debian:buster
+FROM jrottenberg/ffmpeg:4.3-nvidia1804
 
 LABEL maintainer="Andre Germann" \
       url="https://buanet.de"
 
-ENV DEBIAN_FRONTEND noninteractive
+CMD         []
+ENTRYPOINT  []
+
+ARG APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=DontWarn
 
 # Install prerequisites (as listed in iobroker installer.sh)
 RUN apt-get update && apt-get install -y \
@@ -36,7 +39,7 @@ RUN curl -sL https://deb.nodesource.com/setup_12.x | bash \
     && rm -rf /var/lib/apt/lists/*
 
 # Generating locales
-RUN sed -i 's/^# *\(de_DE.UTF-8\)/\1/' /etc/locale.gen \
+RUN sed -i 's/^# *\(zh_CN.UTF-8\)/\1/' /etc/locale.gen \
     && sed -i 's/^# *\(en_US.UTF-8\)/\1/' /etc/locale.gen \
     && locale-gen
 
@@ -84,13 +87,15 @@ RUN chsh -s /bin/bash iobroker \
     && groupmod -g 1000 iobroker
 
 # Setting up ENVs
-ENV DEBIAN_FRONTEND="teletype" \
-    LANG="de_DE.UTF-8" \
-    LANGUAGE="de_DE:de" \
-    LC_ALL="de_DE.UTF-8" \
+ENV LANG="zh_CN.UTF-8" \
+    LANGUAGE="zh_CN:zh" \
+    LC_ALL="zh_CN.UTF-8" \
     SETGID=1000 \
     SETUID=1000 \
-    TZ="Europe/Berlin"
+    TZ="Asia/Shanghai"
+
+# Setting up EXPOSE for Admin
+EXPOSE 8081/tcp	
 
 # Run startup-script
 ENTRYPOINT ["/bin/bash", "-c", "/opt/scripts/iobroker_startup.sh"]
