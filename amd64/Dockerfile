@@ -58,7 +58,7 @@ RUN chmod +x iobroker_startup.sh \
     && chmod +x setup_packages.sh \
     && chmod +x setup_zwave.sh
 WORKDIR /opt/userscripts/
-COPY amd64/scripts/userscript_firststart_example.sh userscript_firststart_example.sh
+COPY amd64/scripts/userscript_firststart.sh userscript_firststart.sh
 COPY amd64/scripts/userscript_everystart_example.sh userscript_everystart_example.sh
 
 # Install ioBroker
