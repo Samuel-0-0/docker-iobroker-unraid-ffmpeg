@@ -31,6 +31,7 @@ RUN apt-get update && apt-get install -y \
     udev \
     unzip \
     wget \
+    imagemagick \
     && rm -rf /var/lib/apt/lists/*
 
 # Install node
